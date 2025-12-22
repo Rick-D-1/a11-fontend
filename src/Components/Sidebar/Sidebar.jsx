@@ -10,9 +10,16 @@ import {
 } from "lucide-react";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvieder";
+import { signOut } from "firebase/auth";
+import auth from "../../Firebase/Firebase.config";
 
 const Sidebar = () => {
     const { role } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        signOut(auth)
+    }
+
 
     const menu = [
         { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
@@ -23,7 +30,12 @@ const Sidebar = () => {
             : []),
 
         { name: "Manage Product", icon: Kanban, path: "/dashboard/manage-product" },
-        { name: "All Users", icon: Users, path: "/dashboard/all-users" },
+
+
+        ...(role === "admin"
+            ? [{ name: "All Users", icon: Users, path: "/dashboard/all-users" }]
+            : []),
+
         { name: "User", icon: User, path: "/admin/users" },
     ];
 
@@ -64,7 +76,7 @@ const Sidebar = () => {
                     <span>Settings</span>
                 </NavLink>
 
-                <button className="flex w-full items-center gap-3 px-4 py-2 rounded-lg text-red-400 hover:bg-red-500 hover:text-white transition">
+                <button onClick={handleLogOut} className="flex w-full items-center gap-3 px-4 py-2 rounded-lg text-red-400 hover:bg-red-500 hover:text-white transition">
                     <LogOut size={20} />
                     <span>Logout</span>
                 </button>

@@ -7,6 +7,9 @@ import DashBoardLayout from "../DashBoard Layout/DashBoardLayout";
 import Maindashboard from "../Pages/DashBoard/MainDashboard/Maindashboard";
 import Addproduct from "../Pages/DashBoard/AddProduct/Addproduct";
 import ManageProduct from "../Pages/ManageProduct/ManageProduct";
+import Addrequest from "../Pages/DashBoard/AddRequest/Addrequest";
+import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -29,16 +32,22 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/dashboard',
-        element: <DashBoardLayout></DashBoardLayout>,
+        path: 'dashboard',
+        element: <PrivateRoute>
+            <DashBoardLayout></DashBoardLayout>
+        </PrivateRoute>,
         children: [
             {
-                path: 'main',
+                path: '/dashboard',
                 element: <Maindashboard></Maindashboard>
             },
             {
-                path: 'add-product',
-                element: <Addproduct></Addproduct>
+                path: 'add-reuest',
+                element: <Addrequest></Addrequest>
+            },
+            {
+                path: 'all-users',
+                element: <AllUsers></AllUsers>
             },
             {
                 path: 'manage-product',

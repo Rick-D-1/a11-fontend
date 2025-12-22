@@ -63,8 +63,9 @@ const ManageProduct = () => {
                                         {product.priceBDT}
                                     </td>
                                     <td>{product.paymentOptions}</td>
-                                    <th>
-                                        <button className="btn btn-ghost btn-xs">details</button>
+                                    <th >
+                                        <button className="btn btn-ghost btn-xs ml-2">Edit</button>
+                                        <button className="btn btn-ghost btn-xs">Delete</button>
                                     </th>
                                 </tr>
                             )

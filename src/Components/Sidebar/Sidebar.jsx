@@ -2,20 +2,29 @@ import { NavLink } from "react-router";
 import {
     LayoutDashboard,
     Users,
+    User,
     CirclePlus,
     Settings,
     Kanban,
     LogOut,
 } from "lucide-react";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvieder";
 
 const Sidebar = () => {
+    const { role } = useContext(AuthContext);
+
     const menu = [
-        { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard/main" },
-        { name: "Add product", icon: CirclePlus, path: "/dashboard/add-product" },
-        { name: "Manage product", icon: Kanban, path: "/dashboard/manage-product" },
-        { name: "Users", icon: Users, path: "/admin/users" },
+        { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
 
 
+        ...(role === "donor"
+            ? [{ name: "Add Request", icon: CirclePlus, path: "/dashboard/add-request" }]
+            : []),
+
+        { name: "Manage Product", icon: Kanban, path: "/dashboard/manage-product" },
+        { name: "All Users", icon: Users, path: "/dashboard/all-users" },
+        { name: "User", icon: User, path: "/admin/users" },
     ];
 
     return (
@@ -33,7 +42,7 @@ const Sidebar = () => {
                         to={item.path}
                         className={({ isActive }) =>
                             `flex items-center gap-3 px-4 py-2 rounded-lg transition
-               ${isActive
+                            ${isActive
                                 ? "bg-sky-400 text-slate-900 font-semibold"
                                 : "hover:bg-slate-800"
                             }`

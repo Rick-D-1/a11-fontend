@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvieder';
 import { updateProfile } from 'firebase/auth';
@@ -9,6 +9,28 @@ import axios from 'axios';
 const Register = () => {
     const { registerWithEmailPassword, setUser, user, handleGoogleSignin } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [upazilas, setUpazilas] = useState([])
+    const [districts, setDistricts] = useState([])
+    const [district, setDistrict] = useState('')
+    const [upazila, setUpazila] = useState('')
+
+    useEffect(() => {
+        axios.get('/upazila.json')
+            .then(res => {
+                setUpazilas(res.data.upazilas)
+
+            })
+        axios.get('/district.json')
+            .then(res => {
+                setDistricts(res.data.districts)
+            })
+    }, [])
+
+    console.log(districts);
+
+
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,7 +38,7 @@ const Register = () => {
         const email = e.target.email.value;
         const pass = e.target.password.value;
         const name = e.target.name.value;
-        const role = e.target.role.value;
+        const blood = e.target.blood.value;
         const photourl = e.target.photourl;
         const file = photourl.files[0]
 
@@ -42,13 +64,18 @@ const Register = () => {
 
         const mainPhotoUrl = res.data.data.display_url
         const formData = {
-            role,
+            blood,
             email,
             pass,
             name,
-            mainPhotoUrl
+            mainPhotoUrl,
+            district,
+            upazila
 
         }
+        console.log(formData);
+
+
         if (res.data.success == true) {
             registerWithEmailPassword(email, pass)
                 .then((userCredential) => {
@@ -120,11 +147,32 @@ const Register = () => {
                                 className="input"
                                 placeholder="Enter your photo url"
                             />
-                            <select name='role' defaultValue="Choose Role" className="select">
-                                <option disabled={true}>Choose role</option>
-                                <option value='manager'>Manager</option>
-                                <option value='buyer'>Buyer</option>
+                            <select name='blood' defaultValue="Choose Blood Group" className="select">
+                                <option disabled={true}>Choose Blood Group</option>
+                                <option value="">Select Blood Group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
 
+                            </select>
+                            <select value={district} onChange={(e) => setDistrict(e.target.value)} className='select'>
+                                <option disabled selected value=''>Select Your District</option>
+                                {
+                                    districts.map(d =>
+                                        <option value={d?.name} key={d.id}>{d?.name}</option>)
+                                }
+                            </select>
+                            <select value={upazila} onChange={(e) => setUpazila(e.target.value)} className='select'>
+                                <option disabled selected value=''>Select Your Upazila</option>
+                                {
+                                    upazilas.map(u =>
+                                        <option value={u?.name} key={u.id}>{u?.name}</option>)
+                                }
                             </select>
                             <label className="label">Email</label>
                             <input

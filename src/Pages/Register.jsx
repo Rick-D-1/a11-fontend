@@ -16,8 +16,10 @@ const Register = () => {
         const email = e.target.email.value;
         const pass = e.target.password.value;
         const name = e.target.name.value;
+        const role = e.target.role.value;
         const photourl = e.target.photourl;
         const file = photourl.files[0]
+
 
         const uppercase = /[A-Z]/;
         const lowercase = /[a-z]/;
@@ -40,6 +42,7 @@ const Register = () => {
 
         const mainPhotoUrl = res.data.data.display_url
         const formData = {
+            role,
             email,
             pass,
             name,
@@ -64,7 +67,7 @@ const Register = () => {
                                     console.log(err);
 
                                 })
-                            navigate('/profile');
+                            navigate('/');
                         })
                         .catch((error) => {
                             console.log(error);
@@ -117,7 +120,12 @@ const Register = () => {
                                 className="input"
                                 placeholder="Enter your photo url"
                             />
+                            <select name='role' defaultValue="Choose Role" className="select">
+                                <option disabled={true}>Choose role</option>
+                                <option value='manager'>Manager</option>
+                                <option value='buyer'>Buyer</option>
 
+                            </select>
                             <label className="label">Email</label>
                             <input
                                 name='email'

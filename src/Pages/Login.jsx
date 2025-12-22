@@ -24,7 +24,7 @@ const Login = () => {
                 const user = userCredential.user;
                 setUser(user);
 
-                navigate('/profile');
+                navigate('/');
             })
             .catch((error) => {
                 console.log(error);
@@ -36,7 +36,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 setUser(user);
-                navigate('/profile');
+                navigate('/');
             })
             .catch(err => console.log(err));
     };

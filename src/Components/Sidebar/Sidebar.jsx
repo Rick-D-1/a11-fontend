@@ -26,10 +26,10 @@ const Sidebar = () => {
 
 
         ...(role === "donor"
-            ? [{ name: "Add Request", icon: CirclePlus, path: "/dashboard/add-request" }]
+            ? [{ name: "Add Request", icon: CirclePlus, path: "add-request" }]
             : []),
 
-        { name: "Manage Product", icon: Kanban, path: "/dashboard/manage-product" },
+        { name: "My Request", icon: Kanban, path: "/dashboard/my-request" },
 
 
         ...(role === "admin"
@@ -68,13 +68,7 @@ const Sidebar = () => {
 
             {/* Footer */}
             <div className="border-t border-slate-700 p-2 space-y-1">
-                <NavLink
-                    to="/admin/settings"
-                    className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-800"
-                >
-                    <Settings size={20} />
-                    <span>Settings</span>
-                </NavLink>
+
 
                 <button onClick={handleLogOut} className="flex w-full items-center gap-3 px-4 py-2 rounded-lg text-red-400 hover:bg-red-500 hover:text-white transition">
                     <LogOut size={20} />

@@ -10,6 +10,8 @@ import ManageProduct from "../Pages/ManageProduct/ManageProduct";
 import Addrequest from "../Pages/DashBoard/AddRequest/Addrequest";
 import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
 import PrivateRoute from "./PrivateRoute";
+import MyRequest from "../Pages/DashBoard/MyRequest/MyRequest";
+import Donate from "../Pages/Donate/Donate";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +31,11 @@ const router = createBrowserRouter([
                 path: '/signup',
                 Component: Register,
             }
+            ,
+            {
+                path: '/donate',
+                Component: Donate,
+            }
         ]
     },
     {
@@ -42,7 +49,7 @@ const router = createBrowserRouter([
                 element: <Maindashboard></Maindashboard>
             },
             {
-                path: 'add-reuest',
+                path: 'add-request',
                 element: <Addrequest></Addrequest>
             },
             {
@@ -50,9 +57,10 @@ const router = createBrowserRouter([
                 element: <AllUsers></AllUsers>
             },
             {
-                path: 'manage-product',
-                element: <ManageProduct></ManageProduct>
+                path: 'my-request',
+                element: <MyRequest></MyRequest>
             },
+
         ]
     }
 ]);

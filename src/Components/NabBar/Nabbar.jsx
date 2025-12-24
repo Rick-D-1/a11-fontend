@@ -22,19 +22,21 @@ const Nabbar = () => {
                         <ul
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><a>All request</a></li>
-
-                            <li><a>Search</a></li>
+                            <li><Link to={'/'}>Home</Link></li>
+                            <li><Link to={'/all-requests'}>All request</Link></li>
+                            <li><Link to={'/search'}>search</Link></li>
                             <li><Link to={'/donate'}>Donate</Link></li>
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <a className="text-red-600 font-bold text-xl">Blood Donate</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>All request</a></li>
+                        <li><Link to={'/'}>Home</Link></li>
+                        <li><Link to={'/all-requests'}>All request</Link></li>
 
-                        <li><a>Search</a></li>
+
+                        <li><Link to={'/search'}>search</Link></li>
                         <li><Link to={'/donate'}>Donate</Link></li>
                     </ul>
                 </div>

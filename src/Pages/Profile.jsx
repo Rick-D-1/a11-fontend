@@ -1,35 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { AuthContext } from '../../../Provider/AuthProvieder';
-import axios from 'axios';
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvieder";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const Maindashboard = () => {
+const Profile = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
 
     const [profile, setProfile] = useState({});
     const [edit, setEdit] = useState(false);
-
-    const [upazilas, setUpazilas] = useState([])
-    const [districts, setDistricts] = useState([])
-    const [district, setDistrict] = useState('')
-    const [upazila, setUpazila] = useState('')
-    // const axiosInstance = useAxios();
-
-
-    useEffect(() => {
-        axios.get('/upazila.json')
-            .then(res => {
-                setUpazilas(res.data.upazilas)
-
-            })
-        axios.get('/district.json')
-            .then(res => {
-                setDistricts(res.data.districts)
-            })
-    }, [])
-
-
 
     useEffect(() => {
         axiosSecure.get(`/users/${user.email}`)
@@ -46,36 +24,6 @@ const Maindashboard = () => {
                 setEdit(false);
             });
     };
-
-
-
-
-
-    const handleRequest = (e) => {
-        e.preventDefault();
-        const form = e.target
-        const req_name = form.req_name.value;
-        const req_email = form.req_email.value;
-        const Recp_name = form.Recp_name.value;
-        const blood_grp = form.blood_grp.value;
-        const Recp_Dist = district;
-        const recp_Upz = upazila;
-        const formData = {
-            req_name,
-            req_email,
-            Recp_name,
-            blood_grp,
-            Recp_Dist,
-            recp_Upz
-        }
-        axiosSecure.post('/requests', formData)
-            .then(res => {
-                alert(res.data.insertedId)
-            })
-            .catch(
-                err => console.log(err)
-            )
-    }
 
     return (
         <div className="max-w-3xl mx-auto bg-white p-6 rounded shadow">
@@ -98,7 +46,7 @@ const Maindashboard = () => {
                     <input
                         type="text"
                         name="name"
-                        value={user?.displayName}
+                        value={profile.name || ""}
                         onChange={handleChange}
                         disabled={!edit}
                         className="input input-bordered w-full"
@@ -109,7 +57,7 @@ const Maindashboard = () => {
                     <label className="label">Email</label>
                     <input
                         type="email"
-                        value={user.email}
+                        value={profile.email || ""}
                         disabled
                         className="input input-bordered w-full bg-gray-100"
                     />
@@ -119,7 +67,7 @@ const Maindashboard = () => {
                     <label className="label">Blood Group</label>
                     <select
                         name="blood"
-                        value={user.blood}
+                        value={profile.blood || ""}
                         onChange={handleChange}
                         disabled={!edit}
                         className="select select-bordered w-full"
@@ -135,7 +83,29 @@ const Maindashboard = () => {
                     </select>
                 </div>
 
+                <div>
+                    <label className="label">District</label>
+                    <input
+                        type="text"
+                        name="district"
+                        value={profile.district || ""}
+                        onChange={handleChange}
+                        disabled={!edit}
+                        className="input input-bordered w-full"
+                    />
+                </div>
 
+                <div>
+                    <label className="label">Upazila</label>
+                    <input
+                        type="text"
+                        name="upazila"
+                        value={profile.upazila || ""}
+                        onChange={handleChange}
+                        disabled={!edit}
+                        className="input input-bordered w-full"
+                    />
+                </div>
 
                 {edit && (
                     <button onClick={handleSave} className="btn btn-success w-full">
@@ -148,4 +118,4 @@ const Maindashboard = () => {
     );
 };
 
-export default Maindashboard;
+export default Profile;

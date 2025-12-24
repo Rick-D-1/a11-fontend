@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
@@ -16,7 +16,7 @@ const Home = () => {
                             Join our community of lifesavers today.
                         </p>
                         <div className="flex gap-4">
-                            <Link to="dashboard/add-request" className="btn bg-white text-red-600">
+                            <Link to='dashboard/add-request' className="btn bg-white text-red-600">
                                 Become a Donor
                             </Link>
                             <Link to="/search" className="btn btn-outline text-white">
@@ -25,7 +25,11 @@ const Home = () => {
                         </div>
                     </div>
 
-
+                    <img
+                        src="https://i.ibb.co/wYJvJ9Y/blood-donation.png"
+                        alt="Blood Donation"
+                        className="rounded-lg"
+                    />
                 </div>
             </section>
 
@@ -85,6 +89,7 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* HOW IT WORKS */}
             <section className="bg-gray-100 py-20">
                 <div className="max-w-6xl mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center mb-10">
@@ -120,7 +125,7 @@ const Home = () => {
                 </div>
             </section>
 
-
+            {/* CTA */}
             <section className="py-20 text-center bg-red-600 text-white">
                 <h2 className="text-3xl font-bold mb-4">
                     Ready to Save a Life?

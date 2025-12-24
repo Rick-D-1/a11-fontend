@@ -36,14 +36,14 @@ const Sidebar = () => {
             ? [{ name: "All Users", icon: Users, path: "/dashboard/all-users" }]
             : []),
 
-        { name: "User", icon: User, path: "/admin/users" },
+
     ];
 
     return (
-        <aside className="w-64 h-screen bg-slate-900 text-slate-200 flex flex-col fixed">
+        <aside className="w-64 h-screen bg-red-600 text-slate-200 flex flex-col fixed">
             {/* Logo */}
             <div className="h-16 flex items-center justify-center border-b border-slate-700">
-                <h1 className="text-xl font-bold text-sky-400">AdminPanel</h1>
+                <h1 className="text-xl font-bold text-white">AdminPanel</h1>
             </div>
 
             {/* Menu */}
@@ -55,7 +55,7 @@ const Sidebar = () => {
                         className={({ isActive }) =>
                             `flex items-center gap-3 px-4 py-2 rounded-lg transition
                             ${isActive
-                                ? "bg-sky-400 text-slate-900 font-semibold"
+                                ? "bg-white text-red-600 font-semibold"
                                 : "hover:bg-slate-800"
                             }`
                         }
@@ -70,7 +70,7 @@ const Sidebar = () => {
             <div className="border-t border-slate-700 p-2 space-y-1">
 
 
-                <button onClick={handleLogOut} className="flex w-full items-center gap-3 px-4 py-2 rounded-lg text-red-400 hover:bg-red-500 hover:text-white transition">
+                <button onClick={handleLogOut} className="flex w-full items-center gap-3 px-4 py-2 rounded-lg text-white hover:bg-red-500 hover:text-white transition">
                     <LogOut size={20} />
                     <span>Logout</span>
                 </button>
